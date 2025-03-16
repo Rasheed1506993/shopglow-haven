@@ -1,3 +1,7 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,19 +39,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -96,6 +93,135 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight;
+  }
+}
+
+@layer components {
+  .product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 ease-out hover:shadow-md hover:-translate-y-1;
+  }
+
+  .btn-primary {
+    @apply bg-shop-800 text-white px-6 py-3 rounded transition-all duration-300 hover:bg-shop-700 focus:outline-none focus:ring-2 focus:ring-shop-600 focus:ring-opacity-50;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border border-shop-800 text-shop-800 px-6 py-3 rounded transition-all duration-300 hover:bg-shop-50 focus:outline-none focus:ring-2 focus:ring-shop-600 focus:ring-opacity-50;
+  }
+
+  .btn-accent {
+    @apply bg-accent-800 text-white px-6 py-3 rounded transition-all duration-300 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-600 focus:ring-opacity-50;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-shop-600 focus:border-transparent transition-all duration-300;
+  }
+  
+  .backdrop-blur {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  .glass {
+    @apply bg-white bg-opacity-10 backdrop-blur;
+  }
+  
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+  
+  .container-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  
+  .loading-skeleton {
+    @apply bg-gray-200 animate-pulse rounded;
+  }
+}
+
+/* Custom animation for page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+/* Product image zoom effect */
+.product-image-zoom {
+  overflow: hidden;
+}
+
+.product-image-zoom img {
+  transition: transform 0.5s ease;
+}
+
+.product-image-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom slider thumb for range inputs */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  background: #333;
+  margin-top: -0.4rem;
+}
+
+input[type="range"]::-moz-range-thumb {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  background: #333;
+  border: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: #ddd;
+  height: 0.2rem;
+  border-radius: 0.1rem;
+}
+
+input[type="range"]::-moz-range-track {
+  background: #ddd;
+  height: 0.2rem;
+  border-radius: 0.1rem;
 }
