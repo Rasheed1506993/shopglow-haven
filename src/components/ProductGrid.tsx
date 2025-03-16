@@ -11,13 +11,15 @@ interface ProductGridProps {
   title?: string;
   subtitle?: string;
   className?: string;
+  limit?: number; // Add limit prop to control the number of products to display
 }
 
 const ProductGrid: React.FC<ProductGridProps> = ({ 
   products, 
   title, 
   subtitle,
-  className 
+  className,
+  limit 
 }) => {
   const [layout, setLayout] = useState<'grid' | 'list'>('grid');
   const [showFilters, setShowFilters] = useState(false);
@@ -45,6 +47,9 @@ const ProductGrid: React.FC<ProductGridProps> = ({
     const categoryMatch = categoryFilter.length === 0 || categoryFilter.includes(product.category);
     return priceMatch && categoryMatch;
   });
+
+  // Apply limit if provided
+  const displayProducts = limit ? filteredProducts.slice(0, limit) : filteredProducts;
 
   return (
     <div className={className}>
@@ -173,8 +178,8 @@ const ProductGrid: React.FC<ProductGridProps> = ({
           "flex-grow",
           layout === 'grid' ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" : "space-y-6"
         )}>
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
+          {displayProducts.length > 0 ? (
+            displayProducts.map((product) => (
               <ProductCard
                 key={product.id}
                 product={product}
