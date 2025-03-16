@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ChevronRight, ShoppingBag, Heart, Share2, Star, Truck, RotateCcw, Check, Plus, Minus } from 'lucide-react';
@@ -8,10 +7,12 @@ import AnimatedTransition from '@/components/AnimatedTransition';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
+import { useCart } from '@/contexts/CartContext';
 
 const ProductDetail = () => {
   const { productId } = useParams<{ productId: string }>();
   const { toast } = useToast();
+  const { addToCart } = useCart();
   
   // Find the product with the matching ID
   const product = products.find(p => p.id === productId);
@@ -40,10 +41,7 @@ const ProductDetail = () => {
   }
   
   const handleAddToCart = () => {
-    toast({
-      title: "تمت الإضافة إلى السلة",
-      description: `تمت إضافة ${quantity} قطعة من ${product.name} إلى سلة التسوق`,
-    });
+    addToCart(product, quantity);
   };
   
   const handleQuantityChange = (amount: number) => {

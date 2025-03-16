@@ -1,9 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingBag, Search, Menu, X, User, Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/components/ui/use-toast';
+import { useCart } from '@/contexts/CartContext';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -11,9 +13,10 @@ const Navbar: React.FC = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { toast } = useToast();
+  const { cartCount } = useCart();
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   
-  const cartItemCount = 0; // This would come from a cart context in a real app
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -26,12 +29,10 @@ const Navbar: React.FC = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      toast({
-        title: "Search initiated",
-        description: `Searching for "${searchQuery}"`,
-        duration: 3000,
-      });
-      // In a real app, we would handle the search here
+      // Create the URL with search parameter
+      navigate(`/products?q=${encodeURIComponent(searchQuery.trim())}`);
+      
+      // Reset search state
       setSearchQuery('');
       setSearchOpen(false);
     }
@@ -61,9 +62,9 @@ const Navbar: React.FC = () => {
           <nav className="hidden md:flex items-center space-x-8">
             <Link to="/" className="text-shop-700 hover:text-shop-900 transition-colors">Home</Link>
             <Link to="/products" className="text-shop-700 hover:text-shop-900 transition-colors">Shop</Link>
-            <Link to="/categories" className="text-shop-700 hover:text-shop-900 transition-colors">Categories</Link>
-            <Link to="/about" className="text-shop-700 hover:text-shop-900 transition-colors">About</Link>
-            <Link to="/contact" className="text-shop-700 hover:text-shop-900 transition-colors">Contact</Link>
+            <Link to="/products?category=Men" className="text-shop-700 hover:text-shop-900 transition-colors">Men</Link>
+            <Link to="/products?category=Women" className="text-shop-700 hover:text-shop-900 transition-colors">Women</Link>
+            <Link to="/products?category=Kids" className="text-shop-700 hover:text-shop-900 transition-colors">Kids</Link>
           </nav>
           
           {/* Icons */}
@@ -80,15 +81,19 @@ const Navbar: React.FC = () => {
               <Heart size={20} />
             </Link>
             
-            <Link to="/account" className="p-2 text-shop-700 hover:text-shop-900 transition-colors" aria-label="Account">
+            <Link 
+              to={isAuthenticated ? "/account" : "/login"} 
+              className="p-2 text-shop-700 hover:text-shop-900 transition-colors" 
+              aria-label="Account"
+            >
               <User size={20} />
             </Link>
             
             <Link to="/cart" className="p-2 text-shop-700 hover:text-shop-900 transition-colors relative" aria-label="Cart">
               <ShoppingBag size={20} />
-              {cartItemCount > 0 && (
+              {cartCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-shop-800 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  {cartItemCount}
+                  {cartCount}
                 </span>
               )}
             </Link>
@@ -113,7 +118,7 @@ const Navbar: React.FC = () => {
                 placeholder="Search for products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="input-field pr-10"
+                className="input-field pr-10 w-full p-3 border border-gray-200 rounded-md"
                 autoFocus
               />
               <button 
@@ -134,9 +139,15 @@ const Navbar: React.FC = () => {
           <nav className="flex flex-col py-4 px-6 space-y-4">
             <Link to="/" className="text-shop-700 hover:text-shop-900 py-2 transition-colors" onClick={toggleMobileMenu}>Home</Link>
             <Link to="/products" className="text-shop-700 hover:text-shop-900 py-2 transition-colors" onClick={toggleMobileMenu}>Shop</Link>
-            <Link to="/categories" className="text-shop-700 hover:text-shop-900 py-2 transition-colors" onClick={toggleMobileMenu}>Categories</Link>
-            <Link to="/about" className="text-shop-700 hover:text-shop-900 py-2 transition-colors" onClick={toggleMobileMenu}>About</Link>
-            <Link to="/contact" className="text-shop-700 hover:text-shop-900 py-2 transition-colors" onClick={toggleMobileMenu}>Contact</Link>
+            <Link to="/products?category=Men" className="text-shop-700 hover:text-shop-900 py-2 transition-colors" onClick={toggleMobileMenu}>Men</Link>
+            <Link to="/products?category=Women" className="text-shop-700 hover:text-shop-900 py-2 transition-colors" onClick={toggleMobileMenu}>Women</Link>
+            <Link to="/products?category=Kids" className="text-shop-700 hover:text-shop-900 py-2 transition-colors" onClick={toggleMobileMenu}>Kids</Link>
+            <Link to={isAuthenticated ? "/account" : "/login"} className="text-shop-700 hover:text-shop-900 py-2 transition-colors" onClick={toggleMobileMenu}>
+              {isAuthenticated ? "My Account" : "Login / Register"}
+            </Link>
+            <Link to="/cart" className="text-shop-700 hover:text-shop-900 py-2 transition-colors" onClick={toggleMobileMenu}>
+              Cart {cartCount > 0 && `(${cartCount})`}
+            </Link>
           </nav>
         </div>
       )}
