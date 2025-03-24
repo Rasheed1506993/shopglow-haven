@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, ShoppingBag, Star } from 'lucide-react';
@@ -14,6 +13,7 @@ const Index = () => {
   const menProducts = products.filter(product => product.category === 'Men');
   const womenProducts = products.filter(product => product.category === 'Women');
   const kidsProducts = products.filter(product => product.category === 'Kids');
+  const electronicProducts = products.filter(product => product.category === 'Electronics');
 
   return (
     <AnimatedTransition>
@@ -40,16 +40,16 @@ const Index = () => {
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent"></div>
         </section>
 
-        {/* أقسام التصنيفات - رجالي، نسائي، أطفال */}
+        {/* أقسام التصنيفات - رجالي، نسائي، أطفال، إلكترونيات */}
         <section className="py-16 px-4">
           <div className="container mx-auto">
             <h2 className="text-3xl font-serif font-semibold text-shop-800 mb-8 text-center">تسوق حسب الفئة</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               {/* قسم الرجال */}
               <div className="group relative h-80 overflow-hidden rounded-lg shadow-md transition-all">
                 <img 
-                  src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?ixlib=rb-4.0.3" 
+                  src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?ixlib=rb-4.0.3" 
                   alt="ملابس رجالية" 
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
@@ -108,6 +108,27 @@ const Index = () => {
                   </Link>
                 </div>
               </div>
+              
+              {/* قسم الإلكترونيات */}
+              <div className="group relative h-80 overflow-hidden rounded-lg shadow-md transition-all">
+                <img 
+                  src="https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-4.0.3" 
+                  alt="منتجات إلكترونية" 
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-shop-900 to-transparent opacity-70"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="text-2xl font-serif font-bold text-white mb-2">إلكترونيات</h3>
+                  <p className="text-gray-100 mb-4">أحدث التقنيات والأجهزة الإلكترونية</p>
+                  <Link 
+                    to="/products?category=Electronics" 
+                    className="inline-flex items-center bg-white text-shop-900 px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition-colors"
+                  >
+                    تسوق الآن
+                    <ChevronRight className="mr-2 h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -151,6 +172,20 @@ const Index = () => {
             </div>
             
             <ProductGrid products={kidsProducts} limit={4} />
+          </div>
+        </section>
+
+        {/* منتجات إلكترونية */}
+        <section className="py-16 px-4">
+          <div className="container mx-auto">
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-3xl font-serif font-semibold text-shop-800">منتجات إلكترونية</h2>
+              <Link to="/products?category=Electronics" className="text-shop-700 hover:text-shop-900 font-medium flex items-center">
+                عرض الكل <ChevronRight className="mr-1 h-5 w-5" />
+              </Link>
+            </div>
+            
+            <ProductGrid products={electronicProducts} limit={4} />
           </div>
         </section>
 

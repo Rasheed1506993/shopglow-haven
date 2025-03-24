@@ -1,4 +1,3 @@
-
 // Product Types
 export interface Product {
   id: string;
@@ -232,6 +231,115 @@ export const products: Product[] = [
       "Dimensions": "3.5\" diameter x 0.4\" height",
       "Cable Length": "5 feet (1.5m)",
       "Features": "Over-voltage protection, temperature control"
+    }
+  },
+  {
+    id: "p9",
+    name: "4K Ultra HD Smart TV",
+    price: 799.99,
+    oldPrice: 899.99,
+    description: "Immerse yourself in stunning 4K visuals with this smart TV featuring advanced HDR technology and integrated streaming services.",
+    detailedDescription: "Transform your living room into a home theater with our cutting-edge 4K Ultra HD Smart TV. Experience breathtaking clarity and vibrant colors with our advanced HDR technology that brings every scene to life. The built-in smart platform gives you instant access to your favorite streaming services, while the voice control feature allows for hands-free operation. With a slim bezel design and multiple HDMI ports for all your devices, this TV combines functionality with elegant aesthetics.",
+    image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?ixlib=rb-4.0.3",
+    gallery: [
+      "https://images.unsplash.com/photo-1593784991095-a205069470b6?ixlib=rb-4.0.3",
+      "https://images.unsplash.com/photo-1461151304267-38535e780c79?ixlib=rb-4.0.3",
+      "https://images.unsplash.com/photo-1539786774889-89ca7b9dc8e0?ixlib=rb-4.0.3"
+    ],
+    category: "Electronics",
+    tags: ["tv", "4k", "smart", "entertainment"],
+    rating: 4.6,
+    reviews: 112,
+    stock: 18,
+    featured: true,
+    specifications: {
+      "Screen Size": "55 inches",
+      "Resolution": "3840 x 2160 (4K)",
+      "HDR": "Yes, HDR10+",
+      "Refresh Rate": "120Hz",
+      "HDMI Ports": "4",
+      "Smart Platform": "SmartView OS"
+    }
+  },
+  {
+    id: "p10",
+    name: "Professional DSLR Camera",
+    price: 1299.99,
+    description: "Capture stunning photos and videos with this professional-grade DSLR camera featuring a high-resolution sensor and interchangeable lenses.",
+    detailedDescription: "Elevate your photography with our Professional DSLR Camera, designed for both enthusiasts and professionals alike. The high-resolution 24.2MP sensor captures incredible detail in every shot, while the advanced autofocus system ensures your subjects are always crystal clear. Record in 4K video resolution to bring your creative vision to life. The weather-sealed body allows you to shoot in challenging conditions, and the intuitive controls put all the power at your fingertips. Compatible with our extensive range of interchangeable lenses, this camera grows with your skills.",
+    image: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?ixlib=rb-4.0.3",
+    gallery: [
+      "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?ixlib=rb-4.0.3",
+      "https://images.unsplash.com/photo-1581591524425-c7e0978865fc?ixlib=rb-4.0.3",
+      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3"
+    ],
+    category: "Electronics",
+    tags: ["camera", "photography", "dslr", "professional"],
+    rating: 4.8,
+    reviews: 86,
+    stock: 12,
+    new: true,
+    specifications: {
+      "Sensor": "24.2MP CMOS",
+      "Processor": "EXPEED 6",
+      "ISO Range": "100-51,200",
+      "Autofocus Points": "153",
+      "Video Resolution": "4K UHD",
+      "Battery Life": "1200 shots"
+    }
+  },
+  {
+    id: "p11",
+    name: "Compact Bluetooth Speaker",
+    price: 79.99,
+    oldPrice: 99.99,
+    description: "Enjoy powerful, room-filling sound in a compact, portable design with 20 hours of battery life and waterproof construction.",
+    detailedDescription: "Take your music anywhere with our Compact Bluetooth Speaker. Despite its small size, this speaker delivers impressive audio quality with deep bass and clear highs. The rugged, waterproof design (IPX7 rated) means you can use it at the beach, by the pool, or even in the shower without worry. Connect wirelessly via Bluetooth 5.0 for stable, high-quality streaming from up to 30 feet away. With a rechargeable battery that lasts up to 20 hours, you can enjoy your favorite tunes all day long. The built-in microphone also allows for hands-free calls when paired with your smartphone.",
+    image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?ixlib=rb-4.0.3",
+    gallery: [
+      "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?ixlib=rb-4.0.3",
+      "https://images.unsplash.com/photo-1589003511680-59c3c1bc6b0a?ixlib=rb-4.0.3",
+      "https://images.unsplash.com/photo-1558089687-f282ffcbc126?ixlib=rb-4.0.3"
+    ],
+    category: "Electronics",
+    tags: ["speaker", "bluetooth", "audio", "portable"],
+    rating: 4.5,
+    reviews: 203,
+    stock: 45,
+    specifications: {
+      "Power Output": "20W",
+      "Battery Life": "20 hours",
+      "Waterproof Rating": "IPX7",
+      "Bluetooth Version": "5.0",
+      "Range": "30 feet",
+      "Dimensions": "7 x 2.5 x 2.5 inches"
+    }
+  },
+  {
+    id: "p12",
+    name: "Ultra-Thin Laptop",
+    price: 1499.99,
+    description: "Powerful performance meets elegant design in this ultra-thin laptop featuring all-day battery life and a stunning display.",
+    detailedDescription: "Experience the perfect balance of power and portability with our Ultra-Thin Laptop. At just 0.6 inches thick and weighing only 2.8 pounds, it's designed to go wherever you do. The edge-to-edge 14-inch display features vibrant colors and sharp text for an immersive viewing experience. Powered by the latest 11th Gen processor and 16GB of RAM, it handles demanding tasks with ease. The backlit keyboard makes typing comfortable in any lighting condition, while the precision touchpad offers smooth, responsive control. With up to 15 hours of battery life, you can work and play all day without hunting for an outlet.",
+    image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3",
+    gallery: [
+      "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3",
+      "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3",
+      "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?ixlib=rb-4.0.3"
+    ],
+    category: "Electronics",
+    tags: ["laptop", "computer", "ultrabook", "portable"],
+    rating: 4.7,
+    reviews: 147,
+    stock: 20,
+    featured: true,
+    specifications: {
+      "Processor": "11th Gen Intel Core i7",
+      "RAM": "16GB LPDDR4X",
+      "Storage": "512GB SSD",
+      "Display": "14-inch 2560 x 1600",
+      "Graphics": "Intel Iris Xe",
+      "Battery Life": "Up to 15 hours"
     }
   }
 ];
