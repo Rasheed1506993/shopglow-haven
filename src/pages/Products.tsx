@@ -20,7 +20,7 @@ const Products = () => {
   const categories = [
     { id: 'Men', name: 'رجالي', image: 'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?ixlib=rb-4.0.3' },
     { id: 'Women', name: 'نسائي', image: 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-4.0.3' },
-    { id: 'Kids', name: 'أطفال', image: 'https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?ixlib=rb-4.0.3' },
+    { id: 'Kids', name: 'أطفال', image: 'https://images.unsplash.com/photo-1522771930-78848d9293e8?ixlib=rb-4.0.3' },
     { id: 'Electronics', name: 'إلكترونيات', image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-4.0.3' }
   ];
   
@@ -57,6 +57,27 @@ const Products = () => {
     { id: 'camera', name: 'كاميرات', image: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?ixlib=rb-4.0.3' },
     { id: 'speaker', name: 'مكبرات صوت', image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?ixlib=rb-4.0.3' },
     { id: 'laptop', name: 'أجهزة لابتوب', image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3' }
+  ];
+
+  // تصنيفات الملابس الرجالية
+  const menCategories = [
+    { id: 'shirts', name: 'قمصان', image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?ixlib=rb-4.0.3' },
+    { id: 'pants', name: 'بناطيل', image: 'https://images.unsplash.com/photo-1555689502-c4b22d76c56f?ixlib=rb-4.0.3' },
+    { id: 'shoes', name: 'أحذية', image: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-4.0.3' }
+  ];
+
+  // تصنيفات الملابس النسائية
+  const womenCategories = [
+    { id: 'dresses', name: 'فساتين', image: 'https://images.unsplash.com/photo-1612336307429-8a898d10e223?ixlib=rb-4.0.3' },
+    { id: 'bags', name: 'حقائب', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3' },
+    { id: 'blouses', name: 'بلوزات', image: 'https://images.unsplash.com/photo-1624206112918-f140f087f9b5?ixlib=rb-4.0.3' }
+  ];
+
+  // تصنيفات منتجات الأطفال
+  const kidsCategories = [
+    { id: 'outfits', name: 'أطقم ملابس', image: 'https://images.unsplash.com/photo-1522771930-78848d9293e8?ixlib=rb-4.0.3' },
+    { id: 'shoes', name: 'أحذية', image: 'https://images.unsplash.com/photo-1555274175-75f4056dfd05?ixlib=rb-4.0.3' },
+    { id: 'toys', name: 'ألعاب', image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-4.0.3' }
   ];
 
   return (
@@ -118,6 +139,90 @@ const Products = () => {
                   key={category.id}
                   to={`/products?category=Electronics&q=${category.id}`}
                   className="group relative overflow-hidden rounded-lg shadow-md h-32"
+                >
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                  <div className="absolute bottom-0 left-0 w-full p-2">
+                    <h3 className="text-sm font-bold text-white">{category.name}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* تصنيفات الملابس الرجالية */}
+        {categoryParam === 'Men' && (
+          <div className="mb-10">
+            <h2 className="text-2xl font-serif font-bold text-shop-800 mb-6 text-center">
+              تصفح الملابس الرجالية
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {menCategories.map((category) => (
+                <Link
+                  key={category.id}
+                  to={`/products?category=Men&q=${category.id}`}
+                  className="group relative overflow-hidden rounded-lg shadow-md h-40"
+                >
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                  <div className="absolute bottom-0 left-0 w-full p-2">
+                    <h3 className="text-sm font-bold text-white">{category.name}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* تصنيفات الملابس النسائية */}
+        {categoryParam === 'Women' && (
+          <div className="mb-10">
+            <h2 className="text-2xl font-serif font-bold text-shop-800 mb-6 text-center">
+              تصفح الملابس النسائية
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {womenCategories.map((category) => (
+                <Link
+                  key={category.id}
+                  to={`/products?category=Women&q=${category.id}`}
+                  className="group relative overflow-hidden rounded-lg shadow-md h-40"
+                >
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                  <div className="absolute bottom-0 left-0 w-full p-2">
+                    <h3 className="text-sm font-bold text-white">{category.name}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* تصنيفات منتجات الأطفال */}
+        {categoryParam === 'Kids' && (
+          <div className="mb-10">
+            <h2 className="text-2xl font-serif font-bold text-shop-800 mb-6 text-center">
+              تصفح منتجات الأطفال
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {kidsCategories.map((category) => (
+                <Link
+                  key={category.id}
+                  to={`/products?category=Kids&q=${category.id}`}
+                  className="group relative overflow-hidden rounded-lg shadow-md h-40"
                 >
                   <img
                     src={category.image}
