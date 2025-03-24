@@ -86,11 +86,11 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Phone size={20} className="text-shop-800 mr-3 flex-shrink-0" />
-                <span className="text-shop-600">+1 (555) 123-4567</span>
+                <span className="text-shop-600">+966539628489</span>
               </li>
               <li className="flex items-center">
                 <Mail size={20} className="text-shop-800 mr-3 flex-shrink-0" />
-                <span className="text-shop-600">hello@glowhaven.com</span>
+                <span className="text-shop-600">mazen1221cool@gmail.com</span>
               </li>
             </ul>
           </div>
@@ -99,7 +99,7 @@ const Footer = () => {
         <div className="mt-12 pt-8 border-t border-shop-100">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-shop-600 text-sm">
-              © {currentYear} GlowHaven. All rights reserved.
+              © {currentYear} GlowHaven. All rights reserved. Developed by Mazen Sharaf AL-Deen & Rasheed Sharaf AL-Deen
             </p>
             <div className="mt-4 md:mt-0 flex space-x-6">
               <img src="https://cdn.shopify.com/s/files/1/0533/2089/files/payment-icons-footer.png" alt="Payment methods" className="h-5" />
