@@ -8,10 +8,12 @@ import ProductRating from '@/components/ProductRating';
 import AnimatedTransition from '@/components/AnimatedTransition';
 
 const Index = () => {
-  // Get featured products
+  // فلترة المنتجات حسب التصنيفات
   const featuredProducts = products.filter(product => product.featured);
-  // Get new products
   const newProducts = products.filter(product => product.new);
+  const menProducts = products.filter(product => product.category === 'Men');
+  const womenProducts = products.filter(product => product.category === 'Women');
+  const kidsProducts = products.filter(product => product.category === 'Kids');
 
   return (
     <AnimatedTransition>
@@ -38,31 +40,117 @@ const Index = () => {
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent"></div>
         </section>
 
-        {/* Featured Products Section */}
+        {/* أقسام التصنيفات - رجالي، نسائي، أطفال */}
         <section className="py-16 px-4">
           <div className="container mx-auto">
-            <div className="flex justify-between items-center mb-8">
-              <h2 className="text-3xl font-serif font-semibold text-shop-800">المنتجات المميزة</h2>
-              <Link to="/products" className="text-shop-700 hover:text-shop-900 font-medium flex items-center">
-                عرض الكل <ChevronRight className="mr-1 h-5 w-5" />
-              </Link>
-            </div>
+            <h2 className="text-3xl font-serif font-semibold text-shop-800 mb-8 text-center">تسوق حسب الفئة</h2>
             
-            <ProductGrid products={featuredProducts} limit={4} />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* قسم الرجال */}
+              <div className="group relative h-80 overflow-hidden rounded-lg shadow-md transition-all">
+                <img 
+                  src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?ixlib=rb-4.0.3" 
+                  alt="ملابس رجالية" 
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-shop-900 to-transparent opacity-70"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="text-2xl font-serif font-bold text-white mb-2">رجالي</h3>
+                  <p className="text-gray-100 mb-4">مجموعة متنوعة من أفضل المنتجات للرجال</p>
+                  <Link 
+                    to="/products?category=Men" 
+                    className="inline-flex items-center bg-white text-shop-900 px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition-colors"
+                  >
+                    تسوق الآن
+                    <ChevronRight className="mr-2 h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* قسم النساء */}
+              <div className="group relative h-80 overflow-hidden rounded-lg shadow-md transition-all">
+                <img 
+                  src="https://images.unsplash.com/photo-1618932260643-eee4a2f652a6?ixlib=rb-4.0.3" 
+                  alt="ملابس نسائية" 
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-shop-900 to-transparent opacity-70"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="text-2xl font-serif font-bold text-white mb-2">نسائي</h3>
+                  <p className="text-gray-100 mb-4">تشكيلة رائعة من أحدث المنتجات النسائية</p>
+                  <Link 
+                    to="/products?category=Women" 
+                    className="inline-flex items-center bg-white text-shop-900 px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition-colors"
+                  >
+                    تسوق الآن
+                    <ChevronRight className="mr-2 h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* قسم الأطفال */}
+              <div className="group relative h-80 overflow-hidden rounded-lg shadow-md transition-all">
+                <img 
+                  src="https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?ixlib=rb-4.0.3" 
+                  alt="ملابس أطفال" 
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-shop-900 to-transparent opacity-70"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="text-2xl font-serif font-bold text-white mb-2">أطفال</h3>
+                  <p className="text-gray-100 mb-4">منتجات مميزة وآمنة للأطفال من جميع الأعمار</p>
+                  <Link 
+                    to="/products?category=Kids" 
+                    className="inline-flex items-center bg-white text-shop-900 px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition-colors"
+                  >
+                    تسوق الآن
+                    <ChevronRight className="mr-2 h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* New Arrivals Section */}
+        {/* منتجات رجالية */}
         <section className="py-16 px-4 bg-gray-50">
           <div className="container mx-auto">
             <div className="flex justify-between items-center mb-8">
-              <h2 className="text-3xl font-serif font-semibold text-shop-800">وصل حديثاً</h2>
-              <Link to="/products" className="text-shop-700 hover:text-shop-900 font-medium flex items-center">
+              <h2 className="text-3xl font-serif font-semibold text-shop-800">منتجات رجالية</h2>
+              <Link to="/products?category=Men" className="text-shop-700 hover:text-shop-900 font-medium flex items-center">
                 عرض الكل <ChevronRight className="mr-1 h-5 w-5" />
               </Link>
             </div>
             
-            <ProductGrid products={newProducts} limit={4} />
+            <ProductGrid products={menProducts} limit={4} />
+          </div>
+        </section>
+
+        {/* منتجات نسائية */}
+        <section className="py-16 px-4">
+          <div className="container mx-auto">
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-3xl font-serif font-semibold text-shop-800">منتجات نسائية</h2>
+              <Link to="/products?category=Women" className="text-shop-700 hover:text-shop-900 font-medium flex items-center">
+                عرض الكل <ChevronRight className="mr-1 h-5 w-5" />
+              </Link>
+            </div>
+            
+            <ProductGrid products={womenProducts} limit={4} />
+          </div>
+        </section>
+
+        {/* منتجات للأطفال */}
+        <section className="py-16 px-4 bg-gray-50">
+          <div className="container mx-auto">
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-3xl font-serif font-semibold text-shop-800">منتجات للأطفال</h2>
+              <Link to="/products?category=Kids" className="text-shop-700 hover:text-shop-900 font-medium flex items-center">
+                عرض الكل <ChevronRight className="mr-1 h-5 w-5" />
+              </Link>
+            </div>
+            
+            <ProductGrid products={kidsProducts} limit={4} />
           </div>
         </section>
 
@@ -93,60 +181,6 @@ const Index = () => {
                   />
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Best Sellers */}
-        <section className="py-16 px-4 bg-shop-50">
-          <div className="container mx-auto">
-            <h2 className="text-3xl font-serif font-semibold text-shop-800 mb-8 text-center">
-              الأكثر مبيعاً
-            </h2>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {products.slice(0, 3).map(product => (
-                <div key={product.id} className="bg-white rounded-lg shadow-sm overflow-hidden transition-all hover:shadow-md">
-                  <Link to={`/product/${product.id}`} className="block relative pt-[100%]">
-                    <img 
-                      src={product.image} 
-                      alt={product.name} 
-                      className="absolute inset-0 w-full h-full object-cover object-center"
-                    />
-                    {product.oldPrice && (
-                      <span className="absolute top-4 right-4 bg-red-500 text-white text-sm font-medium px-2 py-1 rounded">
-                        خصم {Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)}%
-                      </span>
-                    )}
-                  </Link>
-                  
-                  <div className="p-4">
-                    <Link to={`/product/${product.id}`} className="block mb-1">
-                      <h3 className="font-serif font-medium text-shop-800 hover:text-shop-700 transition-colors">
-                        {product.name}
-                      </h3>
-                    </Link>
-                    
-                    <ProductRating rating={product.rating} size="sm" className="mb-2" />
-                    
-                    <div className="flex justify-between items-center mt-2">
-                      <div className="flex items-center">
-                        {product.oldPrice && (
-                          <span className="text-gray-400 line-through mr-2">${product.oldPrice}</span>
-                        )}
-                        <span className="font-semibold text-shop-800">${product.price}</span>
-                      </div>
-                      
-                      <button 
-                        className="text-shop-800 hover:text-shop-600 p-1 rounded-full border border-shop-200 hover:border-shop-300 transition-colors"
-                        aria-label="Add to cart"
-                      >
-                        <ShoppingBag size={18} />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </section>

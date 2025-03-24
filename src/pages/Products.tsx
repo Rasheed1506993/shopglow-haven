@@ -5,7 +5,9 @@ import { products } from '@/lib/data';
 import ProductGrid from '@/components/ProductGrid';
 import AnimatedTransition from '@/components/AnimatedTransition';
 import { Input } from '@/components/ui/input';
-import { Search } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Search, Filter } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Products = () => {
   const [searchParams] = useSearchParams();
@@ -14,19 +16,26 @@ const Products = () => {
   
   const [localSearchQuery, setLocalSearchQuery] = useState(searchQuery);
   
-  // Initialize filtered products state
+  // تعريف التصنيفات
+  const categories = [
+    { id: 'Men', name: 'رجالي', image: 'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?ixlib=rb-4.0.3' },
+    { id: 'Women', name: 'نسائي', image: 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-4.0.3' },
+    { id: 'Kids', name: 'أطفال', image: 'https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?ixlib=rb-4.0.3' }
+  ];
+  
+  // تهيئة حالة المنتجات المفلترة
   const [filteredProducts, setFilteredProducts] = useState(products);
   
-  // Update filtered products when category or search query changes
+  // تحديث المنتجات المفلترة عند تغيير التصنيف أو كلمة البحث
   useEffect(() => {
     let result = products;
     
-    // Filter by category if provided
+    // فلترة حسب التصنيف إذا تم تحديده
     if (categoryParam) {
       result = result.filter(product => product.category === categoryParam);
     }
     
-    // Filter by search query if provided
+    // فلترة حسب كلمة البحث إذا تم إدخالها
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       result = result.filter(product => 
@@ -42,17 +51,45 @@ const Products = () => {
   return (
     <AnimatedTransition>
       <div className="container mx-auto px-4 py-8">
-        {/* Page Header */}
+        {/* رأس الصفحة */}
         <div className="mb-8 text-center">
           <h1 className="text-4xl font-serif font-bold text-shop-800 mb-4">
-            {categoryParam ? `${categoryParam}` : 'جميع المنتجات'}
+            {categoryParam ? `${categoryParam === 'Men' ? 'منتجات رجالية' : categoryParam === 'Women' ? 'منتجات نسائية' : 'منتجات أطفال'}` : 'جميع المنتجات'}
           </h1>
           <p className="text-shop-600 max-w-2xl mx-auto">
             استكشف مجموعة واسعة من المنتجات عالية الجودة، مصممة لتلبية احتياجاتك اليومية وتعزيز أسلوب حياتك.
           </p>
         </div>
         
-        {/* Search Bar */}
+        {/* قسم التصنيفات */}
+        {!categoryParam && (
+          <div className="mb-10">
+            <h2 className="text-2xl font-serif font-bold text-shop-800 mb-6 text-center">
+              تصفح حسب الفئة
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {categories.map((category) => (
+                <Link
+                  key={category.id}
+                  to={`/products?category=${category.id}`}
+                  className="group relative overflow-hidden rounded-lg shadow-md h-48"
+                >
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                  <div className="absolute bottom-0 left-0 w-full p-4">
+                    <h3 className="text-xl font-bold text-white">{category.name}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        {/* شريط البحث */}
         <div className="mb-8 max-w-xl mx-auto">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -64,7 +101,7 @@ const Products = () => {
               onChange={(e) => setLocalSearchQuery(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && localSearchQuery.trim()) {
-                  // Update URL with search query
+                  // تحديث الرابط مع كلمة البحث
                   const params = new URLSearchParams(searchParams);
                   params.set('q', localSearchQuery);
                   window.location.search = params.toString();
@@ -74,7 +111,7 @@ const Products = () => {
           </div>
         </div>
         
-        {/* ProductGrid with all filtering capabilities */}
+        {/* إعرض المنتجات مع التصنيفات */}
         <ProductGrid 
           products={filteredProducts} 
           title={filteredProducts.length > 0 ? undefined : "لا توجد منتجات مطابقة لبحثك"}
