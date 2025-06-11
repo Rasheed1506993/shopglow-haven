@@ -1,6 +1,6 @@
 {
   "name": "shopglow-haven",
-  "homepage": "https://Rasheed1506993.github.io/shopglow-haven",
+
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,9 +9,9 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "preview": "vite preview"
+
+
 
   },
   "dependencies": {
